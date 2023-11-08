@@ -3,47 +3,59 @@
 	padding: 0;
 	box-sizing: border-box;
 	list-style: none;
-	font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-family: 'Archivo Black', sans-serif;
 }
 
 :root {
 	--clr-background: rgb(97, 143, 140);
-	--clr-hangman-objects: black;
+	--clr-hangman-objects: rgb(19, 19, 19);
 }
 
 body {
 	height: 100vh;
 	width: 100vw;
 	background-color: var(--clr-background);
+	padding: 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
-	padding: 2rem;
 }
 
-#list{
+#list {
 	display: flex;
 	gap: 1rem;
 }
 
-#list > li {
+#list>li {
 	height: 100%;
 	width: 4rem;
-	font-size: 5vw;
+	font-size: 4rem;
 	text-align: center;
+	color: var(--clr-hangman-objects);
 	height: 100;
 	border-bottom: solid .5rem var(--clr-hangman-objects);
+	margin-top: auto;
 }
 
 
 
 
+main {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	max-width: 60rem;
+}
+
+.guess_wrapper {
+	align-self: flex-end;
+}
 
 .hangman {
 	position: relative;
 	width: 100%;
 	max-width: 40rem;
+	margin-left: -10%;
 }
 
 .hangman::after {
@@ -111,7 +123,7 @@ body {
 .arm1,
 .leg1 {
 	width: 40%;
-	transform: rotate(45deg);
+	transform: rotate(35deg);
 	margin-left: auto;
 	height: 100%;
 }
@@ -120,7 +132,7 @@ body {
 .leg2 {
 	width: 40%;
 	height: 100%;
-	transform: rotate(-45deg);
+	transform: rotate(-35deg);
 	margin-right: auto;
 }
 
@@ -144,6 +156,6 @@ body {
 	margin-top: -30%;
 }
 
-.hidden{
+.hidden {
 	visibility: hidden;
 }

@@ -1,50 +1,47 @@
 // ________________________MAYAS_BEM___________________________________
-let word = `bitch`.toLocaleUpperCase();
+let word = `bitch`.toUpperCase();
 let wordArray = word.split(``);
 
 //display lines
 let list = document.querySelector("#list");
 for (let i = 0; i < word.length; i++) {
 	let line = document.createElement("li");
-	line.innerHTML = ` `;
+	line.classList.add('line')
+	line.innerHTML = ``;
 	list.append(line);
 }
-
-//display lifes
-let life = 10;
-let lifeDisplay = document.querySelector("#lifes");
-lifeDisplay.innerHTML = `lifes = ${life}`;
-
-//function that checks guess
-
-let correctGuess = [];
+//hangman parts display hidden
+let hangman = document.querySelectorAll(`.hidden`);
+let hiddenIndex = 0;
 let incorrectGuess = [];
-let guess = document.addEventListener("keypress", function (e) {
-	console.log(e.key);
+let correctGuess = [];
+
+
+document.addEventListener("keypress", function (e) {
+	let guess = e.key.toUpperCase();
+	//check guess and logs in array
+	//correct guess
+	if (word.includes(guess)) {
+		for (let i = 0; i < word.length; i++) {
+			if (guess === word[i]) {
+				let addGuess = document.querySelectorAll('.line');
+				addGuess[i].innerHTML = guess;
+			}
+		}
+		correctGuess.push(guess);
+
+		//incorrect guess
+	} else if (word.includes(guess) === false) {
+		hangman[hiddenIndex].classList.remove("hidden");
+		hiddenIndex += 1;
+		incorrectGuess.push(guess);
+	}
+
+	if (hiddenIndex === hangman.length) {
+		console.log(`loser bitch`);
+		//break;
+	}
 });
-
-// while (true) {
-// 	let guess = document.addEventListener("keypress", function (e) {
-// 		console.log(e.key);
-// 	});
-
-// 	if (word.includes(guess) === true) {
-// 		for (let i = 0; i < word.length; i++) {
-// 			if (guess === word[i]) {
-// 				lineArray[i] = guess;
-// 			}
-// 		}
-// 	} else if (word.includes(guess) !== true) {
-// 		life -= 1;
-// 	}
-// 	if (life === 0) {
-// 		alert(`you're a hanged man!!`);
-// 		break;
-// 	} else if (lineArray.includes(` _ `) === false) {
-// 		alert(`horrraayyy!!!`);
-// 		break;
-// 	}
-// }
 
 // ADDS HANGMAN PART
 // let hangman = document.querySelectorAll(`.hidden`);
