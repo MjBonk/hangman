@@ -1,0 +1,149 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style: none;
+	font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+	--clr-background: rgb(97, 143, 140);
+	--clr-hangman-objects: black;
+}
+
+body {
+	height: 100vh;
+	width: 100vw;
+	background-color: var(--clr-background);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 2rem;
+}
+
+#list{
+	display: flex;
+	gap: 1rem;
+}
+
+#list > li {
+	height: 100%;
+	width: 4rem;
+	font-size: 5vw;
+	text-align: center;
+	height: 100;
+	border-bottom: solid .5rem var(--clr-hangman-objects);
+}
+
+
+
+
+
+.hangman {
+	position: relative;
+	width: 100%;
+	max-width: 40rem;
+}
+
+.hangman::after {
+	content: '';
+	display: block;
+	padding-bottom: 100%;
+}
+
+
+.hangman_grid {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(12, 1fr);
+}
+
+
+/* THE HANGED MAN :))  */
+.hangman_grid>div {
+	background-color: var(--clr-hangman-objects);
+}
+
+.hill {
+	grid-area: 9 / 5 / 13 / 13;
+	border-radius: 100rem 100rem 0 0;
+	/* border: solid 1rem var(--clr-hangman-objects);
+	border-bottom: 0; */
+}
+
+.main-pole {
+	grid-area: 2 / 8 / 9 / 10;
+	width: 30%;
+	height: 110%;
+	margin: 0 auto;
+}
+
+.horiz-pole {
+	grid-area: 1 / 1 / 2 / 10;
+	height: 60%;
+	margin-top: auto;
+}
+
+.rope {
+	grid-area: 2 / 1 / 4 / 3;
+	width: 10%;
+	margin: 0 auto;
+}
+
+.head {
+	grid-area: 4 / 1 / 6 / 3;
+	border-radius: 50%;
+}
+
+.body {
+	grid-area: 7 / 1 / 8 / 3;
+	width: 20%;
+	margin: -55% auto 0 auto;
+	height: 200%;
+}
+
+
+/* ARM AND LEG STYLE */
+.arm1,
+.leg1 {
+	width: 40%;
+	transform: rotate(45deg);
+	margin-left: auto;
+	height: 100%;
+}
+
+.arm2,
+.leg2 {
+	width: 40%;
+	height: 100%;
+	transform: rotate(-45deg);
+	margin-right: auto;
+}
+
+
+/* ARM AND LEG PLACE  */
+.arm1 {
+	grid-area: 6 / 1 / 7 / 2;
+}
+
+.arm2 {
+	grid-area: 6 / 2 / 7 / 3;
+}
+
+.leg1 {
+	grid-area: 8 / 1 / 9 / 2;
+	margin-top: -30%;
+}
+
+.leg2 {
+	grid-area: 8 / 2 / 9 / 3;
+	margin-top: -30%;
+}
+
+.hidden{
+	visibility: hidden;
+}
