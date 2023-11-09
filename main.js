@@ -1,47 +1,80 @@
-// ________________________MAYAS_BEM___________________________________
 let word = `bitch`.toUpperCase();
-let wordArray = word.split(``);
 
 //display lines
 let list = document.querySelector("#list");
 for (let i = 0; i < word.length; i++) {
 	let line = document.createElement("li");
-	line.classList.add('line')
+	line.classList.add("line");
 	line.innerHTML = ``;
 	list.append(line);
 }
+
 //hangman parts display hidden
 let hangman = document.querySelectorAll(`.hidden`);
 let hiddenIndex = 0;
-let incorrectGuess = [];
+
+//incorrect guess will display the guess at random place
 let correctGuess = [];
+let incorrectGuess = [];
+let body = document.querySelector(".incorrect_guess_display");
 
 
+//checks if all the letters a guessed
+function checkWin(w, a){
+	checkCount = 0
+	for (let i = 0; i < w.length; i++) {
+		if (a.includes(w[i])){
+			checkCount +=1
+		}
+	}
+	if(checkCount === w.length){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+//gameplay
 document.addEventListener("keypress", function (e) {
 	let guess = e.key.toUpperCase();
+
 	//check guess and logs in array
-	//correct guess
-	if (word.includes(guess)) {
+	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
+		//do nothing for now
+		//correct guess
+	} else if (word.includes(guess)) {
 		for (let i = 0; i < word.length; i++) {
 			if (guess === word[i]) {
-				let addGuess = document.querySelectorAll('.line');
+				let addGuess =
+					document.querySelectorAll(".line");
 				addGuess[i].innerHTML = guess;
 			}
 		}
 		correctGuess.push(guess);
-
+		console.log(correctGuess);
 		//incorrect guess
 	} else if (word.includes(guess) === false) {
 		hangman[hiddenIndex].classList.remove("hidden");
 		hiddenIndex += 1;
-		incorrectGuess.push(guess);
-	}
 
-	if (hiddenIndex === hangman.length) {
-		console.log(`loser bitch`);
-		//break;
-	}
+		//logs incorrect guess in array and displays it
+		incorrectGuess.push(guess);
+		let incorrectLetter = document.createElement("p");
+		incorrectLetter.innerHTML = String(guess);
+		body.append(incorrectLetter);
+	}	
 });
+
+if(checkWin(word, correctGuess) === true){
+	console.log('hurray')
+}
+
+
+// let awnser = confirm(`play again?`);
+// if (awnser === false) {
+// 	break;
+// }
 
 // ADDS HANGMAN PART
 // let hangman = document.querySelectorAll(`.hidden`);
