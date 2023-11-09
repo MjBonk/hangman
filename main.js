@@ -1,99 +1,98 @@
 let word = `bitch`.toUpperCase();
 
 //display lines
-let list = document.querySelector("#list");
+let linelist = document.querySelector("#list");
 for (let i = 0; i < word.length; i++) {
 	let line = document.createElement("li");
 	line.classList.add("line");
 	line.innerHTML = ``;
-	list.append(line);
+	linelist.append(line);
 }
 
+//hangman parts display hidden
+let hangman = document.querySelectorAll(`.hidden`);
+let hiddenIndex = 0;
+
+
+//store guesses
+let correctGuess = [];
+let incorrectGuess = [];
+let incorrectGuessList = document.querySelector(".incorrect_guess_display");
+
+
 //checks if all the letters a guessed
-function checkWin(w, a) {
-	checkCount = 0;
+function checkWin(w, a){
+	checkCount = 0
 	for (let i = 0; i < w.length; i++) {
-		if (a.includes(w[i])) {
-			checkCount += 1;
+		if (a.includes(w[i])){
+			checkCount +=1
 		}
 	}
-	if (checkCount === w.length) {
+	if(checkCount === w.length){
 		return true;
-	} else {
+	}else{
 		return false;
 	}
 }
 
 
+//gameplay
+document.addEventListener("keypress", function (e) {
+	let guess = e.key.toUpperCase();
 
-
-while (true) {
-	//hangman parts display hidden
-	let hangman = document.querySelectorAll(`.hidden`);
-	let hiddenIndex = 0;
-	console.log(1)
-	//incorrect guess will display the guess at random place
-	let correctGuess = [];
-	let incorrectGuess = [];
-	let body = document.querySelector(".incorrect_guess_display");
-
-
-	//gameplay
-	document.addEventListener("keypress", function (e) {
-		let guess = e.key.toUpperCase();
-
-		//check guess and logs in array
-		if (
-			incorrectGuess.includes(guess) ||
-			correctGuess.includes(guess)
-		) {
-			//do nothing for now
-			//correct guess
-		} else if (word.includes(guess)) {
-			for (let i = 0; i < word.length; i++) {
-				if (guess === word[i]) {
-					let addGuess =
-						document.querySelectorAll(
-							".line"
-						);
-					addGuess[i].innerHTML = guess;
-				}
+	//check guess and logs in array
+	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
+		//do nothing for now
+		//correct guess
+	} else if (word.includes(guess)) {
+		for (let i = 0; i < word.length; i++) {
+			if (guess === word[i]) {
+				let addGuess =
+					document.querySelectorAll(".line");
+				addGuess[i].innerHTML = guess;
 			}
-			correctGuess.push(guess);
-			console.log(correctGuess);
-			//incorrect guess
-		} else if (word.includes(guess) === false) {
-			hangman[hiddenIndex].classList.remove("hidden");
-			hiddenIndex += 1;
-
-			//logs incorrect guess in array and displays it
-			incorrectGuess.push(guess);
-			let incorrectLetter = document.createElement("p");
-			incorrectLetter.innerHTML = String(guess);
-			body.append(incorrectLetter);
 		}
-	});
+		correctGuess.push(guess);
 
-	if (checkWin(word, correctGuess) === true) {
-		console.log("hurray");
-		break;
+		//incorrect guess
+	} else if (word.includes(guess) === false) {
+		hangman[hiddenIndex].classList.remove("hidden");
+		hiddenIndex += 1;
+
+		//logs incorrect guess in array and displays it
+		incorrectGuess.push(guess);
+		let incorrectLetter = document.createElement("p");
+		incorrectLetter.innerHTML = String(guess);
+		incorrectGuessList.append(incorrectLetter);
+	}	
+
+
+
+	if(checkWin(word, correctGuess) === true){
+		console.log('hurray')
+	}else if (hiddenIndex === 10){
+		console.log('you lost')
 	}
-}
+});
 
-// let awnser = confirm(`play again?`);
-// if (awnser === false) {
-// 	break;
-// }
 
-// ADDS HANGMAN PART
-// let hangman = document.querySelectorAll(`.hidden`);
-// let index = 0;
-// document.addEventListener("keydown", function (e) {
-// 	if ((e.key = ` `)) {
-// 		hangman[index].classList.remove('hidden')
-// 		index +=1
-// 	}
-// });
+
+
+
+
+
+
+
+//loop 
+//display lines and remove hangman
+
+    //loop
+	//plays game 
+	//if gameover or win ->>break 
+
+
+
+
 
 // // -------------MAYAS-AND-OSKARS----------------------------------------------
 // let word = prompt(`player1 picks a word`).toUpperCase();
@@ -123,6 +122,10 @@ while (true) {
 // 		break;
 // 	}
 // }
+
+
+
+
 
 // // -------------ESKILS----------------------------------------------
 // // Function to display the word with all letters guessed correctly
