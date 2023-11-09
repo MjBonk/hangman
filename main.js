@@ -1,49 +1,47 @@
 let word = `bitch`.toUpperCase();
 
 //display lines
-let linelist = document.querySelector("#list");
+let linelistEl = document.querySelector("#list");
 for (let i = 0; i < word.length; i++) {
-	let line = document.createElement("li");
-	line.classList.add("line");
-	line.innerHTML = ``;
-	linelist.append(line);
+	let lineEl = document.createElement("li");
+	lineEl.classList.add("line");
+	lineEl.innerHTML = ``;
+	linelistEl.append(lineEl);
 }
 
 //hangman parts display hidden
-let hangman = document.querySelectorAll(`.hidden`);
+let hangmanEl = document.querySelectorAll(`.hidden`);
 let hiddenIndex = 0;
 
 
 //store guesses
 let correctGuess = [];
 let incorrectGuess = [];
-let incorrectGuessList = document.querySelector(".incorrect_guess_display");
+let incorrectGuessListEl = document.querySelector(".incorrect_guess_display");
 
 
 //checks if all the letters a guessed
-function checkWin(w, a){
-	checkCount = 0
+function checkWin(w, a) {
+	checkCount = 0;
 	for (let i = 0; i < w.length; i++) {
-		if (a.includes(w[i])){
-			checkCount +=1
+		if (a.includes(w[i])) {
+			checkCount += 1;
 		}
 	}
-	if(checkCount === w.length){
+	if (checkCount === w.length) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
-
 
 //gameplay
 document.addEventListener("keypress", function (e) {
 	let guess = e.key.toUpperCase();
 
-	//check guess and logs in array
+
 	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
-		//do nothing for now
-		//correct guess
+		//already guessed - do nothing for now
 	} else if (word.includes(guess)) {
 		for (let i = 0; i < word.length; i++) {
 			if (guess === word[i]) {
@@ -53,43 +51,23 @@ document.addEventListener("keypress", function (e) {
 			}
 		}
 		correctGuess.push(guess);
-
-		//incorrect guess
 	} else if (word.includes(guess) === false) {
-		hangman[hiddenIndex].classList.remove("hidden");
+		hangmanEl[hiddenIndex].classList.remove("hidden");
 		hiddenIndex += 1;
 
 		//logs incorrect guess in array and displays it
 		incorrectGuess.push(guess);
-		let incorrectLetter = document.createElement("p");
+		let incorrectLetter = document.createElement("li");
 		incorrectLetter.innerHTML = String(guess);
-		incorrectGuessList.append(incorrectLetter);
-	}	
+		incorrectGuessListEl.append(incorrectLetter);
+	}
 
-
-
-	if(checkWin(word, correctGuess) === true){
-		console.log('hurray')
-	}else if (hiddenIndex === 10){
-		console.log('you lost')
+	if (checkWin(word, correctGuess) === true) {
+		console.log("hurray");
+	} else if (hiddenIndex === 10) {
+		console.log("you lost");
 	}
 });
-
-
-
-
-
-
-
-
-
-//loop 
-//display lines and remove hangman
-
-    //loop
-	//plays game 
-	//if gameover or win ->>break 
-
 
 
 
@@ -122,10 +100,6 @@ document.addEventListener("keypress", function (e) {
 // 		break;
 // 	}
 // }
-
-
-
-
 
 // // -------------ESKILS----------------------------------------------
 // // Function to display the word with all letters guessed correctly

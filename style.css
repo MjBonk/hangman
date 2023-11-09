@@ -24,6 +24,7 @@ body {
 #list {
 	display: flex;
 	gap: 1rem;
+	align-self: flex-end;
 }
 
 #list>li {
@@ -47,9 +48,8 @@ main {
 	max-width: 60rem;
 }
 
-.guess_wrapper {
-	align-self: flex-end;
-}
+
+
 
 .hangman {
 	position: relative;
