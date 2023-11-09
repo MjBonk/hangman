@@ -9,67 +9,76 @@ for (let i = 0; i < word.length; i++) {
 	list.append(line);
 }
 
-//hangman parts display hidden
-let hangman = document.querySelectorAll(`.hidden`);
-let hiddenIndex = 0;
-
-//incorrect guess will display the guess at random place
-let correctGuess = [];
-let incorrectGuess = [];
-let body = document.querySelector(".incorrect_guess_display");
-
-
 //checks if all the letters a guessed
-function checkWin(w, a){
-	checkCount = 0
+function checkWin(w, a) {
+	checkCount = 0;
 	for (let i = 0; i < w.length; i++) {
-		if (a.includes(w[i])){
-			checkCount +=1
+		if (a.includes(w[i])) {
+			checkCount += 1;
 		}
 	}
-	if(checkCount === w.length){
+	if (checkCount === w.length) {
 		return true;
-	}else{
+	} else {
 		return false;
 	}
 }
 
 
-//gameplay
-document.addEventListener("keypress", function (e) {
-	let guess = e.key.toUpperCase();
 
-	//check guess and logs in array
-	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
-		//do nothing for now
-		//correct guess
-	} else if (word.includes(guess)) {
-		for (let i = 0; i < word.length; i++) {
-			if (guess === word[i]) {
-				let addGuess =
-					document.querySelectorAll(".line");
-				addGuess[i].innerHTML = guess;
+
+while (true) {
+	//hangman parts display hidden
+	let hangman = document.querySelectorAll(`.hidden`);
+	let hiddenIndex = 0;
+	console.log(1)
+	//incorrect guess will display the guess at random place
+	let correctGuess = [];
+	let incorrectGuess = [];
+	let body = document.querySelector(".incorrect_guess_display");
+
+
+	//gameplay
+	document.addEventListener("keypress", function (e) {
+		let guess = e.key.toUpperCase();
+
+		//check guess and logs in array
+		if (
+			incorrectGuess.includes(guess) ||
+			correctGuess.includes(guess)
+		) {
+			//do nothing for now
+			//correct guess
+		} else if (word.includes(guess)) {
+			for (let i = 0; i < word.length; i++) {
+				if (guess === word[i]) {
+					let addGuess =
+						document.querySelectorAll(
+							".line"
+						);
+					addGuess[i].innerHTML = guess;
+				}
 			}
+			correctGuess.push(guess);
+			console.log(correctGuess);
+			//incorrect guess
+		} else if (word.includes(guess) === false) {
+			hangman[hiddenIndex].classList.remove("hidden");
+			hiddenIndex += 1;
+
+			//logs incorrect guess in array and displays it
+			incorrectGuess.push(guess);
+			let incorrectLetter = document.createElement("p");
+			incorrectLetter.innerHTML = String(guess);
+			body.append(incorrectLetter);
 		}
-		correctGuess.push(guess);
-		console.log(correctGuess);
-		//incorrect guess
-	} else if (word.includes(guess) === false) {
-		hangman[hiddenIndex].classList.remove("hidden");
-		hiddenIndex += 1;
+	});
 
-		//logs incorrect guess in array and displays it
-		incorrectGuess.push(guess);
-		let incorrectLetter = document.createElement("p");
-		incorrectLetter.innerHTML = String(guess);
-		body.append(incorrectLetter);
-	}	
-});
-
-if(checkWin(word, correctGuess) === true){
-	console.log('hurray')
+	if (checkWin(word, correctGuess) === true) {
+		console.log("hurray");
+		break;
+	}
 }
-
 
 // let awnser = confirm(`play again?`);
 // if (awnser === false) {
