@@ -1,7 +1,16 @@
+// ______TO_DO________________________________________________
+// - introduktion
+// - random word
+// - kan bara gissa bokstäver
+// - responsiveness
+// - gameplay "loop"!!!
+// - win/loose displays
+// ___________________________________________________________
+
 let word = `bitch`.toUpperCase();
 
 //display lines
-let linelistEl = document.querySelector("#list");
+let linelistEl = document.querySelector("#lines");
 for (let i = 0; i < word.length; i++) {
 	let lineEl = document.createElement("li");
 	lineEl.classList.add("line");
@@ -13,12 +22,10 @@ for (let i = 0; i < word.length; i++) {
 let hangmanEl = document.querySelectorAll(`.hidden`);
 let hiddenIndex = 0;
 
-
 //store guesses
 let correctGuess = [];
 let incorrectGuess = [];
-let incorrectGuessListEl = document.querySelector(".incorrect_guess_display");
-
+let incorrectGuessListEl = document.querySelector(".incorrect-guess");
 
 //checks if all the letters a guessed
 function checkWin(w, a) {
@@ -38,7 +45,6 @@ function checkWin(w, a) {
 //gameplay
 document.addEventListener("keypress", function (e) {
 	let guess = e.key.toUpperCase();
-
 
 	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
 		//already guessed - do nothing for now
@@ -62,14 +68,14 @@ document.addEventListener("keypress", function (e) {
 		incorrectGuessListEl.append(incorrectLetter);
 	}
 
-	if (checkWin(word, correctGuess) === true) {
-		console.log("hurray");
-	} else if (hiddenIndex === 10) {
-		console.log("you lost");
-	}
+	// if (checkWin(word, correctGuess) === true) {
+	// 	confirm("you won");
+	// 	location.reload()
+	// } else if (hiddenIndex === 10) {
+	// 	confirm("you lost");
+	// 	location.reload()
+	// }
 });
-
-
 
 
 // // -------------MAYAS-AND-OSKARS----------------------------------------------

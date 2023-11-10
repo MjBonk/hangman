@@ -17,17 +17,29 @@ body {
 	background-color: var(--clr-background);
 	padding: 2rem;
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	flex-direction: row-reverse;
+	margin-top: 3rem;
+}
+@media (min-width: 40rem) {
+	body {
+		flex-direction: row;
+		align-items: center;
+		margin-top: 0;
+	}
 }
 
-#list {
+.incorrect-guess{
+	margin:auto 0;
+}
+
+#lines {
 	display: flex;
 	gap: 1rem;
 	align-self: flex-end;
 }
 
-#list>li {
+.line {
 	height: 100%;
 	width: 4rem;
 	font-size: 4rem;
@@ -40,24 +52,33 @@ body {
 
 
 
-
 main {
 	display: flex;
-	justify-content: center;
-	width: 100%;
-	max-width: 60rem;
+	flex-direction: column;
 }
 
-
-
+@media (min-width: 40rem) {
+	main {
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+		max-width: 60rem;
+	}
+}
 
 .hangman {
 	position: relative;
 	width: 100%;
-	max-width: 40rem;
-	margin-left: -10%;
+	max-width: 30rem;
 }
 
+@media (min-width: 40rem) {
+	.hangman {
+		margin-left: -10%;
+	}
+}
+
+/* makes it scale as a proportional square  */
 .hangman::after {
 	content: '';
 	display: block;
@@ -65,7 +86,9 @@ main {
 }
 
 
-.hangman_grid {
+
+/* THE HANGED MAN :))  */
+.hangman__grid {
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -74,17 +97,15 @@ main {
 	grid-template-rows: repeat(12, 1fr);
 }
 
-
-/* THE HANGED MAN :))  */
-.hangman_grid>div {
+.hangman__grid>div {
 	background-color: var(--clr-hangman-objects);
 }
 
+
+/* hangman parts */
 .hill {
 	grid-area: 9 / 5 / 13 / 13;
 	border-radius: 100rem 100rem 0 0;
-	/* border: solid 1rem var(--clr-hangman-objects);
-	border-bottom: 0; */
 }
 
 .main-pole {
@@ -137,7 +158,7 @@ main {
 }
 
 
-/* ARM AND LEG PLACE  */
+/* ARM AND LEG PLACEMENT  */
 .arm1 {
 	grid-area: 6 / 1 / 7 / 2;
 }
