@@ -3,10 +3,7 @@
 // - random word
 // - kan bara gissa bokstäver
 // - responsiveness
-// - gameplay "loop"!!!
-// - win/loose displays
 // ___________________________________________________________
-
 let word = `bitch`.toUpperCase();
 
 //display lines
@@ -72,13 +69,22 @@ document.addEventListener("keypress", function (e) {
 		incorrectGuessListEl.append(incorrectLetter);
 	}
 
+
+	function addAnimation(){
+		endStatementText.classList.add('animate__animated')
+		endStatementText.classList.add('animate__flash')
+	}
 	//win or loose 
 	let endStatementEl = document.querySelector('#end-statement');
 	let endStatementText = document.querySelector('#end-statement__text')
 	if (checkWin(word, correctGuess) === true) {
+		addAnimation()
 		endStatementText.innerHTML = 'YOU WON!!!'
 		endStatementEl.classList.remove('hidden')
+
+
 	} else if (hiddenIndex === 10) {
+		addAnimation()
 		endStatementText.innerHTML = 'YOU LOST :(('
 		endStatementEl.classList.remove('hidden')
 	}
