@@ -9,6 +9,7 @@
 :root {
 	--clr-background: rgb(97, 143, 140);
 	--clr-hangman-objects: rgb(19, 19, 19);
+	--clr-statement-text: rgb(200, 255, 0);
 }
 
 body {
@@ -21,6 +22,7 @@ body {
 	flex-direction: row-reverse;
 	margin-top: 3rem;
 }
+
 @media (min-width: 40rem) {
 	body {
 		flex-direction: row;
@@ -29,8 +31,36 @@ body {
 	}
 }
 
-.incorrect-guess{
-	margin:auto 0;
+main {
+	display: flex;
+	flex-direction: column;
+}
+
+@media (min-width: 40rem) {
+	main {
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+		max-width: 60rem;
+	}
+}
+
+#end-statement{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	color: var(--clr-statement-text) ;
+	font-size: 10vw;
+}
+
+#replay-butn{
+	height: 5rem;
+	width: 5rem;
+	border-radius: 50%;
+	border:0;
+	background-color: var(--clr-statement-text);
+	rotate: -30deg;
 }
 
 #lines {
@@ -49,21 +79,8 @@ body {
 	border-bottom: solid .5rem var(--clr-hangman-objects);
 	margin-top: auto;
 }
-
-
-
-main {
-	display: flex;
-	flex-direction: column;
-}
-
-@media (min-width: 40rem) {
-	main {
-		flex-direction: row;
-		justify-content: center;
-		width: 100%;
-		max-width: 60rem;
-	}
+.incorrect-guess {
+	margin: auto 0;
 }
 
 .hangman {

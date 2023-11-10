@@ -22,6 +22,8 @@ for (let i = 0; i < word.length; i++) {
 let hangmanEl = document.querySelectorAll(`.hidden`);
 let hiddenIndex = 0;
 
+//win/loose statement
+
 //store guesses
 let correctGuess = [];
 let incorrectGuess = [];
@@ -68,13 +70,13 @@ document.addEventListener("keypress", function (e) {
 		incorrectGuessListEl.append(incorrectLetter);
 	}
 
-	// if (checkWin(word, correctGuess) === true) {
-	// 	confirm("you won");
-	// 	location.reload()
-	// } else if (hiddenIndex === 10) {
-	// 	confirm("you lost");
-	// 	location.reload()
-	// }
+	if (checkWin(word, correctGuess) === true) {
+		confirm("you won");
+		location.reload()
+	} else if (hiddenIndex === 10) {
+		confirm("you lost");
+		location.reload()
+	}
 });
 
 
