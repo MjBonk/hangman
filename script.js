@@ -22,7 +22,6 @@ for (let i = 0; i < word.length; i++) {
 let hangmanEl = document.querySelectorAll(`.hidden`);
 let hiddenIndex = 0;
 
-//win/loose statement
 
 //store guesses
 let correctGuess = [];
@@ -48,21 +47,24 @@ function checkWin(w, a) {
 document.addEventListener("keypress", function (e) {
 	let guess = e.key.toUpperCase();
 
+	//already guessed
 	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
-		//already guessed - do nothing for now
+		//do nothing for now
+
+		//correct guess
 	} else if (word.includes(guess)) {
 		for (let i = 0; i < word.length; i++) {
 			if (guess === word[i]) {
-				let addGuess =
-					document.querySelectorAll(".line");
+				let addGuess = document.querySelectorAll(".line");
 				addGuess[i].innerHTML = guess;
 			}
 		}
 		correctGuess.push(guess);
+
+		//incorrect guess
 	} else if (word.includes(guess) === false) {
 		hangmanEl[hiddenIndex].classList.remove("hidden");
 		hiddenIndex += 1;
-
 		//logs incorrect guess in array and displays it
 		incorrectGuess.push(guess);
 		let incorrectLetter = document.createElement("li");
@@ -70,6 +72,7 @@ document.addEventListener("keypress", function (e) {
 		incorrectGuessListEl.append(incorrectLetter);
 	}
 
+	//win or loose 
 	if (checkWin(word, correctGuess) === true) {
 		confirm("you won");
 		location.reload()
