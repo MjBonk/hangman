@@ -73,14 +73,23 @@ document.addEventListener("keypress", function (e) {
 	}
 
 	//win or loose 
+	let endStatementEl = document.querySelector('#end-statement');
+	let endStatementText = document.querySelector('#end-statement__text')
 	if (checkWin(word, correctGuess) === true) {
-		confirm("you won");
-		location.reload()
+		endStatementText.innerHTML = 'YOU WON!!!'
+		endStatementEl.classList.remove('hidden')
 	} else if (hiddenIndex === 10) {
-		confirm("you lost");
-		location.reload()
+		endStatementText.innerHTML = 'YOU LOST :(('
+		endStatementEl.classList.remove('hidden')
 	}
 });
+
+//replay button - reloads the page 
+let replayButn = document.querySelector('#end-statement__butn')
+replayButn.addEventListener('click', function(){
+	location.reload()
+})
+
 
 
 // // -------------MAYAS-AND-OSKARS----------------------------------------------
