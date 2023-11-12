@@ -95,7 +95,7 @@ document.addEventListener("keypress", function (e) {
 	if (checkWin(word, correctGuess) === true) {
 		renderWinOrLoose(`YOU WON!!`)
 	} else if (hiddenIndex === 10) {
-		renderWinOrLoose(`YOU LOST!!`)
+		renderWinOrLoose(`YOU LOST!! :(`)
 	}
 });
 
@@ -105,14 +105,12 @@ replayButn.addEventListener("click", function () {
 	location.reload();
 });
 
-
-
-//display input window on phone screen
-let mediaQuery = matchMedia('(min-width: 40rem)')
-let input = document.querySelector("#input")
-if (mediaQuery.matches){
-	input.classList.remove('none')
-}
+// display input window on phone screen
+// let mediaQuery = matchMedia('(min-width: 40rem)')
+// let input = document.querySelector("#input")
+// if (mediaQuery.matches){
+// 	input.classList.remove('none')
+// }
 
 
 // // -------------MAYAS-AND-OSKARS----------------------------------------------
