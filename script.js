@@ -1,12 +1,22 @@
 // ______TO_DO________________________________________________
-// - introduktion
-// - random word
 // - kan bara gissa bokstäver
-// - responsiveness
+// - input guess phone
 // ___________________________________________________________
-let word = `bitch`.toUpperCase();
 
-//display lines
+//generate random word from array
+let wordArr = [
+	"vulcano",
+	"bitch",
+	"jazz",
+	"joke",
+	"staff",
+	"puzzle",
+	"school",
+	"bug",
+];
+let word = wordArr[Math.floor(Math.random() * wordArr.length)].toUpperCase();
+
+//render lines for each letter
 let linelistEl = document.querySelector("#lines");
 for (let i = 0; i < word.length; i++) {
 	let lineEl = document.createElement("li");
@@ -19,13 +29,12 @@ for (let i = 0; i < word.length; i++) {
 let hangmanEl = document.querySelectorAll(`.hidden`);
 let hiddenIndex = 0;
 
-
 //store guesses
 let correctGuess = [];
 let incorrectGuess = [];
 let incorrectGuessListEl = document.querySelector(".incorrect-guess");
 
-//checks if all the letters a guessed
+//checks if all the letters are guessed
 function checkWin(w, a) {
 	checkCount = 0;
 	for (let i = 0; i < w.length; i++) {
@@ -40,16 +49,27 @@ function checkWin(w, a) {
 	}
 }
 
+// function that displays win/lost
+function renderWinOrLoose(string){
+	let endStatementEl = document.querySelector("#end-statement");
+	let endStatementText = document.querySelector("#end-statement__text");
+	endStatementEl.classList.remove("hidden");
+	endStatementText.classList.add("animate__animated", "animate__flash");
+	return endStatementText.innerHTML = string;
+}
+
+
 //gameplay
 document.addEventListener("keypress", function (e) {
 	let guess = e.key.toUpperCase();
 
-	//already guessed
+	//ALREADY GUESSED
 	if (incorrectGuess.includes(guess) || correctGuess.includes(guess)) {
 		//do nothing for now
 
-		//correct guess
+	//CORRECT GUESS
 	} else if (word.includes(guess)) {
+		//displays letter on the correct lines 
 		for (let i = 0; i < word.length; i++) {
 			if (guess === word[i]) {
 				let addGuess = document.querySelectorAll(".line");
@@ -58,8 +78,9 @@ document.addEventListener("keypress", function (e) {
 		}
 		correctGuess.push(guess);
 
-		//incorrect guess
+		//INCORRECT GUESS
 	} else if (word.includes(guess) === false) {
+		//displays one hangman part at a time
 		hangmanEl[hiddenIndex].classList.remove("hidden");
 		hiddenIndex += 1;
 		//logs incorrect guess in array and displays it
@@ -70,32 +91,28 @@ document.addEventListener("keypress", function (e) {
 	}
 
 
-	function addAnimation(){
-		endStatementText.classList.add('animate__animated')
-		endStatementText.classList.add('animate__flash')
-	}
-	//win or loose 
-	let endStatementEl = document.querySelector('#end-statement');
-	let endStatementText = document.querySelector('#end-statement__text')
+	//win or loose
 	if (checkWin(word, correctGuess) === true) {
-		addAnimation()
-		endStatementText.innerHTML = 'YOU WON!!!'
-		endStatementEl.classList.remove('hidden')
-
-
+		renderWinOrLoose(`YOU WON!!`)
 	} else if (hiddenIndex === 10) {
-		addAnimation()
-		endStatementText.innerHTML = 'YOU LOST :(('
-		endStatementEl.classList.remove('hidden')
+		renderWinOrLoose(`YOU LOST!!`)
 	}
 });
 
-//replay button - reloads the page 
-let replayButn = document.querySelector('#end-statement__butn')
-replayButn.addEventListener('click', function(){
-	location.reload()
-})
+//replay button - reloads the page
+let replayButn = document.querySelector("#end-statement__butn");
+replayButn.addEventListener("click", function () {
+	location.reload();
+});
 
+
+
+//display input window on phone screen
+let mediaQuery = matchMedia('(min-width: 40rem)')
+let input = document.querySelector("#input")
+if (mediaQuery.matches){
+	input.classList.remove('none')
+}
 
 
 // // -------------MAYAS-AND-OSKARS----------------------------------------------
